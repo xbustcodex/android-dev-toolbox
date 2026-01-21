@@ -1,5 +1,5 @@
 # 🧰 Android Dev Toolbox (v1)
-A paid-first, Play-Store-safe Android developer utility app.
+
 
 ## Features (v1)
 - Logcat Viewer (foreground-only, safe mode)
