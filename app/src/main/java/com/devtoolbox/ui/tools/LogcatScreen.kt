@@ -1,1 +1,18 @@
+package com.devtoolbox.ui.tools
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun LogcatScreen() {
+    Scaffold(topBar = { TopAppBar(title = { Text("Logcat Viewer") }) }) { padding ->
+        Column(Modifier.padding(padding).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Text("v1 placeholder")
+            Text("Planned: filters, search, app package filter, foreground-only.")
+        }
+    }
+}
 
