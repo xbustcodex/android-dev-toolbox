@@ -27,7 +27,6 @@ A paid-first, Play-Store-safe Android developer utility app.
 
 ## 2) `LICENSE` (MIT)
 
-```text
 MIT License
 
 Copyright (c) 2026
