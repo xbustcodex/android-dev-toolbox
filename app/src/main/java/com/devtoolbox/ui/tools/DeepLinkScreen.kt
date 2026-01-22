@@ -2,8 +2,8 @@ package com.devtoolbox.ui.tools
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.provider.Settings
 import android.net.Uri
+import android.provider.Settings
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -22,8 +22,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 
 data class ResolveDetails(
@@ -40,6 +40,7 @@ fun DeepLinkScreen() {
     var uriText by remember { mutableStateOf(TextFieldValue("")) }
     var lastResult by remember { mutableStateOf<String?>(null) }
     var resolveDetails by remember { mutableStateOf<ResolveDetails?>(null) }
+
     var autoLaunchFromHistory by remember { mutableStateOf(false) }
 
     var history by remember { mutableStateOf<List<DeepLinkHistoryItem>>(emptyList()) }
@@ -169,7 +170,7 @@ fun DeepLinkScreen() {
                 modifier = Modifier.fillMaxWidth()
             )
 
-            // Actions
+            // Actions row
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -209,10 +210,13 @@ fun DeepLinkScreen() {
                 }
             }
 
-            // Result + resolve details
+            // Result card
             if (lastResult != null) {
                 Card(modifier = Modifier.fillMaxWidth()) {
-                    Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Column(
+                        Modifier.padding(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
                         Text(lastResult!!, style = MaterialTheme.typography.bodyMedium)
 
                         resolveDetails?.let { details ->
@@ -227,43 +231,41 @@ fun DeepLinkScreen() {
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                               Text(
-                                   text = "Auto-launch when selecting history",
-                                   style = MaterialTheme.typography.bodyMedium,
-                                   modifier = Modifier.weight(1f)
-                               )
-                               Switch(
-                                   checked = autoLaunchFromHistory,
-                                   onCheckedChange = { autoLaunchFromHistory = it }
-                               )
-                            }
 
-                            Spacer(Modifier.height(8.dp))
+                            Spacer(Modifier.height(6.dp))
 
                             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                                 OutlinedButton(onClick = {
                                     clipboard.setText(AnnotatedString(details.handlerPackage))
                                     showToast("Copied: ${details.handlerPackage}")
-                                }) {
-                                    Text("Copy package")
-                                }
+                                }) { Text("Copy package") }
 
                                 OutlinedButton(onClick = {
                                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                                         data = Uri.parse("package:${details.handlerPackage}")
                                     }
                                     context.startActivity(intent)
-                                }) {
-                                    Text("App info")
-                                }
+                                }) { Text("App info") }
                             }
                         }
                     }
                 }
+            }
+
+            // Auto-launch toggle (GLOBAL)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Auto-launch when selecting history",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.weight(1f)
+                )
+                Switch(
+                    checked = autoLaunchFromHistory,
+                    onCheckedChange = { autoLaunchFromHistory = it }
+                )
             }
 
             // History header
@@ -301,15 +303,15 @@ fun DeepLinkScreen() {
                     items(history, key = { it.uri }) { item ->
                         Card(
                             modifier = Modifier
-                               .fillMaxWidth()
-                               .clickable {
-                                   uriText = TextFieldValue(item.uri)
-                                   if (autoLaunchFromHistory) {
-                                       launchDeepLink(item.uri)
-                                   } else {
-                                       doResolve(item.uri)
-                                   }
-                               }
+                                .fillMaxWidth()
+                                .clickable {
+                                    uriText = TextFieldValue(item.uri)
+                                    if (autoLaunchFromHistory) {
+                                        launchDeepLink(item.uri)
+                                    } else {
+                                        doResolve(item.uri)
+                                    }
+                                }
                         ) {
                             Column(Modifier.padding(12.dp)) {
                                 Text(item.uri, style = MaterialTheme.typography.bodyMedium)
@@ -332,10 +334,6 @@ fun DeepLinkScreen() {
         }
     }
 }
-
---------------------
-//   helper
---------------------   
 
 private fun relativeTime(ms: Long): String {
     val diff = System.currentTimeMillis() - ms
