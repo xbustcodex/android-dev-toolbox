@@ -7,5 +7,8 @@ data class AppInfo(
     val packageName: String,
     val versionName: String,
     val versionCode: Long,
-    val icon: Drawable
+    val icon: Drawable,
+    val isSystemApp: Boolean,
+    val apkSizeBytes: Long,
+    val lastUpdateTime: Long
 )
