@@ -25,7 +25,7 @@ import java.util.Date
 import java.util.Locale
 
 private enum class AppFilter { USER, SYSTEM, ALL }
-private enum class SortMode { AZ, SIZE, RECENT }
+private enum class SortMode { AZ, SIZE, RECENT, INSTALLED }
 
 @Composable
 fun PackagesScreen() {
@@ -65,6 +65,7 @@ fun PackagesScreen() {
             SortMode.AZ -> searched.sortedBy { it.name.lowercase() }
             SortMode.SIZE -> searched.sortedByDescending { it.apkSizeBytes }
             SortMode.RECENT -> searched.sortedByDescending { it.lastUpdateTime }
+            SortMode.INSTALLED -> searched.sortedByDescending { it.lastUpdateTime } // placeholder
         }
     }
 
@@ -87,6 +88,10 @@ fun PackagesScreen() {
                         DropdownMenuItem(
                             text = { Text("Sort: Size") },
                             onClick = { sortMode = SortMode.SIZE; sortMenuOpen = false }
+                        )
+                        DropdownMenuItem(
+                            text = { Text("Sort: Install Date") },
+                            onClick = { sortMode = SortMode.INSTALLED; sortMenuOpen = false }
                         )
                         DropdownMenuItem(
                             text = { Text("Sort: Recent Update") },
