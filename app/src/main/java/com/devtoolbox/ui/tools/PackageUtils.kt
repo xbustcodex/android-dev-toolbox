@@ -32,7 +32,8 @@ fun loadInstalledApps(context: Context, includeSystemApps: Boolean = false): Lis
                     icon = pm.getApplicationIcon(app),
                     isSystemApp = isSystem,
                     apkSizeBytes = apkSize,
-                    lastUpdateTime = pkgInfo.lastUpdateTime
+                    lastUpdateTime = pkgInfo.lastUpdateTime,
+                    firstInstallTime = pkgInfo.firstInstallTime
                 )
             } catch (_: Exception) {
                 null
