@@ -10,5 +10,6 @@ data class AppInfo(
     val icon: Drawable,
     val isSystemApp: Boolean,
     val apkSizeBytes: Long,
-    val lastUpdateTime: Long
+    val lastUpdateTime: Long,
+    val firstInstallTime: Long
 )
