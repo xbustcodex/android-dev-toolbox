@@ -246,7 +246,7 @@ private fun AppRow(app: AppInfo) {
             )
 
             Text(
-                "APK ${formatBytes(app.apkSizeBytes)} • Updated ${formatDate(app.lastUpdateTime)} • Installed ${formatDate(app.firstInstallTime)}"
+                "APK ${formatBytes(app.apkSizeBytes)} • Updated ${formatDate(app.lastUpdateTime)} • Installed ${formatDate(app.firstInstallTime)}",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
