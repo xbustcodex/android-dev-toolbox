@@ -33,15 +33,36 @@ fun PackagesScreen() {
 
     var allApps by remember { mutableStateOf<List<AppInfo>>(emptyList()) }
     var query by remember { mutableStateOf(TextFieldValue("")) }
+    var launchableOnly by remember { mutableStateOf(true) }
 
     var filter by remember { mutableStateOf(AppFilter.USER) }
     var sortMode by remember { mutableStateOf(SortMode.AZ) }
     var sortMenuOpen by remember { mutableStateOf(false) }
 
     // Load apps whenever filter changes (system apps toggle affects data source)
-    LaunchedEffect(filter) {
+    LaunchedEffect(filter, launchableOnly) {
         val includeSystem = (filter == AppFilter.SYSTEM || filter == AppFilter.ALL)
-        allApps = loadInstalledApps(context, includeSystemApps = includeSystem)
+        allApps = loadInstalledApps(
+            context,
+            includeSystemApps = includeSystem,
+            launchableOnly = launchableOnly
+        )
+    }
+    Row(
+        modifier = Modifier
+            .padding(horizontal = 12.dp, vertical = 6.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = "Launchable only",
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.weight(1f)
+        )
+        Switch(
+            checked = launchableOnly,
+            onCheckedChange = { launchableOnly = it }
+        )
     }
 
     val visibleApps = remember(allApps, query, filter, sortMode) {
