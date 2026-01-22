@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AndroidDevToolbox"
+rootProject.name = "android-dev-toolbox"
 include(":app")
