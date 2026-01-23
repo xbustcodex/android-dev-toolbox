@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "91215859025",
+    "project_id": "android-dev-toolbox-f7aa9",
+    "storage_bucket": "android-dev-toolbox-f7aa9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91215859025:android:603951f3da62f9e76f1770",
+        "android_client_info": {
+          "package_name": "com.devtoolbox"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_kw1L0YBNIsIC3MQE0H7hVlPf7eC4aQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
