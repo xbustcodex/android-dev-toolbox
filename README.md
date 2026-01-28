@@ -22,7 +22,7 @@
 
 ```
 
-
+App name, icon, and branding are not covered by the open-source license.
 
 
 ## 2) `LICENSE` (MIT)
